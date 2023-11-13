@@ -1,0 +1,45 @@
+intf_libs = # Interface dependencies.
+impl_libs = # Implementation dependencies.
+#import xxxx_libs += libhello%lib{hello}
+
+lib{cglm}: {h c}{** -version} h{version} $impl_libs $intf_libs
+
+h{version}: in{version} $src_root/manifest
+
+h{export}@./: c.importable = false
+
+# Build options.
+#
+c.poptions =+ "-I$out_root" "-I$src_root"
+
+{hbmia obja}{*}: c.poptions += -DCGLM_STATIC_BUILD
+{hbmis objs}{*}: c.poptions += -DCGLM_SHARED_BUILD
+
+# Export options.
+#
+lib{cglm}:
+{
+  c.export.poptions = "-I$out_root" "-I$src_root"
+  c.export.libs = $intf_libs
+}
+
+liba{cglm}: c.export.poptions += -DCGLM_STATIC
+libs{cglm}: c.export.poptions += -DCGLM_SHARED
+
+# For pre-releases use the complete version to make sure they cannot be used
+# in place of another pre-release or the final version. See the version module
+# for details on the version.* variable values.
+#
+if $version.pre_release
+  lib{cglm}: bin.lib.version = "-$version.project_id"
+else
+  lib{cglm}: bin.lib.version = "-$version.major.$version.minor"
+
+# Install into the cglm/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+h{*}:
+{
+  install         = include/cglm/
+  install.subdirs = true
+}

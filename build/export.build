@@ -1,0 +1,6 @@
+$out_root/
+{
+  include cglm/
+}
+
+export $out_root/cglm/$import.target
