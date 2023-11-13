@@ -1,6 +1,7 @@
 : 1
 name: cglm
 version: 0.9.1-a.0.z
+upstream-version: 0.9.1
 type: lib
 language: c
 summary: cglm C library
