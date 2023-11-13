@@ -1,0 +1,14 @@
+pub_hdrs = h{**}
+
+./: $pub_hdrs
+
+h{export}@./: c.importable = false
+
+# Install into the libhello/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+h{*}:
+{
+  install         = include/cglm/
+  install.subdirs = true
+}

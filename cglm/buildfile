@@ -1,16 +1,27 @@
-intf_libs = # Interface dependencies.
+intf_libs = libm%lib{m} # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
-lib{cglm}: {h c}{** -version} h{version} $impl_libs $intf_libs
+pub = [dir_path] ../include/cglm/
 
-h{version}: in{version} $src_root/manifest
+include $pub
+
+pub_hdrs = $($pub/ pub_hdrs)
+
+lib{cglm}: {c}{**} $pub/{$pub_hdrs} $impl_libs $intf_libs
 
 h{export}@./: c.importable = false
 
 # Build options.
 #
-c.poptions =+ "-I$out_root" "-I$src_root"
+out_pfx_inc = [dir_path] $out_root/include/
+src_pfx_inc = [dir_path] $src_root/include/
+out_pfx_src = [dir_path] $out_root/cglm/
+src_pfx_src = [dir_path] $src_root/cglm/
+
+c.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
+              "-I$out_pfx_inc" "-I$src_pfx_inc"
+
 
 {hbmia obja}{*}: c.poptions += -DCGLM_STATIC_BUILD
 {hbmis objs}{*}: c.poptions += -DCGLM_SHARED_BUILD
@@ -19,8 +30,9 @@ c.poptions =+ "-I$out_root" "-I$src_root"
 #
 lib{cglm}:
 {
-  c.export.poptions = "-I$out_root" "-I$src_root"
+  c.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc"
   c.export.libs = $intf_libs
+
 }
 
 liba{cglm}: c.export.poptions += -DCGLM_STATIC
@@ -35,11 +47,6 @@ if $version.pre_release
 else
   lib{cglm}: bin.lib.version = "-$version.major.$version.minor"
 
-# Install into the cglm/ subdirectory of, say, /usr/include/
-# recreating subdirectories.
+# Don't install private headers.
 #
-h{*}:
-{
-  install         = include/cglm/
-  install.subdirs = true
-}
+h{*}: install = false
