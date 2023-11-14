@@ -1,4 +1,4 @@
-intf_libs = libm%lib{m} # Interface dependencies.
+intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
@@ -21,6 +21,7 @@ src_pfx_src = [dir_path] $src_root/cglm/
 
 c.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
               "-I$out_pfx_inc" "-I$src_pfx_inc"
+c.libs += -lm
 
 
 {hbmia obja}{*}: c.poptions += -DCGLM_STATIC_BUILD
