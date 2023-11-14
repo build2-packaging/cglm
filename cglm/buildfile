@@ -1,6 +1,5 @@
 intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
-#import xxxx_libs += libhello%lib{hello}
 
 pub = [dir_path] ../include/cglm/
 
@@ -9,8 +8,6 @@ include $pub
 pub_hdrs = $($pub/ pub_hdrs)
 
 lib{cglm}: {c}{**} $pub/{$pub_hdrs} $impl_libs $intf_libs
-
-h{export}@./: c.importable = false
 
 # Build options.
 #
