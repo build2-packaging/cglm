@@ -20,7 +20,6 @@ c.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
               "-I$out_pfx_inc" "-I$src_pfx_inc"
 c.libs += -lm
 
-
 {hbmia obja}{*}: c.poptions += -DCGLM_STATIC_BUILD
 {hbmis objs}{*}: c.poptions += -DCGLM_SHARED_BUILD
 
@@ -30,11 +29,13 @@ lib{cglm}:
 {
   c.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc"
   c.export.libs = $intf_libs
-
 }
 
 liba{cglm}: c.export.poptions += -DCGLM_STATIC
 libs{cglm}: c.export.poptions += -DCGLM_SHARED
+if ($c.target.class == 'windows')
+	libs{cglm}: c.poptions += -DCGLM_EXPORTS
+
 
 # For pre-releases use the complete version to make sure they cannot be used
 # in place of another pre-release or the final version. See the version module
