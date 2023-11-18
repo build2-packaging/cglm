@@ -22,6 +22,8 @@ c.libs += -lm
 
 {hbmia obja}{*}: c.poptions += -DCGLM_STATIC_BUILD
 {hbmis objs}{*}: c.poptions += -DCGLM_SHARED_BUILD
+if ($c.target.class == 'windows')
+	objs{*}: c.poptions += -DCGLM_EXPORTS
 
 # Export options.
 #
@@ -33,8 +35,6 @@ lib{cglm}:
 
 liba{cglm}: c.export.poptions += -DCGLM_STATIC
 libs{cglm}: c.export.poptions += -DCGLM_SHARED
-if ($c.target.class == 'windows')
-	libs{cglm}: c.poptions += -DCGLM_EXPORTS
 
 
 # For pre-releases use the complete version to make sure they cannot be used
