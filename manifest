@@ -1,14 +1,14 @@
 : 1
 name: cglm
-version: 0.9.1+8
+version: 0.9.1+9
 type: lib
 language: c
-summary: cglm C library
-license: other: proprietary ; Not free/open source.
+summary: Highly Optimized Graphics Math (glm) for C
+license: MIT
 description-file: README.md
-url: https://example.org/cglm
+url: https://github.com/recp/cglm
 email: duarm0@disroot.org
-#build-error-email: duarm0@disroot.org
+build-error-email: duarm0@disroot.org
 
 depends: * build2 >= 0.16.0
 depends: * bpkg >= 0.16.0
