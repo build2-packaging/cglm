@@ -1,6 +1,6 @@
 : 1
 name: cglm
-version: 0.9.4
+version: 0.9.5-a.0.z
 type: lib
 language: c
 summary: Highly Optimized Graphics Math (glm) for C
