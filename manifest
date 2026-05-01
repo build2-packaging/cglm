@@ -1,6 +1,6 @@
 : 1
 name: cglm
-version: 0.9.5-a.0.z
+version: 0.9.6-a.0.z
 type: lib
 language: c
 summary: Highly Optimized Graphics Math (glm) for C
@@ -12,4 +12,3 @@ build-error-email: duarm0@disroot.org
 
 depends: * build2 >= 0.16.0
 depends: * bpkg >= 0.16.0
-#depends: libhello ^1.0.0
