@@ -1,0 +1,7 @@
+: 1
+name: cglm
+version: 0.9.6
+type: lib
+language: c
+summary: Highly Optimized Graphics Math (glm) for C
+license: MIT
